@@ -1,17 +1,14 @@
-use proc_macro_test::{Create, hide};
+use proc_macro_test::{StructName1, StructName2};
 
-#[hide]
-struct Example();
+#[derive(StructName1)]
+struct Yeet;
 
-#[derive(Create)]
-#[hide(off)]
-struct Coordinate {
-    x: i32,
-    y: i32
-}
+#[derive(StructName2)]
+struct Yote;
 
 fn main() {
-    let coord = create();
+    let yeet = Yeet;
+    let yote = Yote;
 
-    println!("Coordinate ({}, {})", coord.x, coord.y);
+    println!("First: {}, Second: {};", yeet.struct_name(), yote.struct_name());
 }

@@ -1,19 +1,28 @@
 // Define a macro...
-proc_macro procedural_macro(code: Code) -> Code {
-    code.convert_to_assignment()
+proc_macro Addable(code: Code) -> Code {
+    println!("Running addable...")
+    let struct_name = code.struct_name;
 
+    extra_code = create_code(...);
+
+    extra_code
 }
 
-// Write this code...
-fn func_before_macro() -> i32 {
-    let mut a = 1;
-    procedural_macro!(set a as 2);
-    return a
+#[derive(Addable)]
+struct Coordinate {
+    x: i32,
+    y: i32
 }
 
-// This is what really happens
-fn func_after_macro() -> i32 {
-    let mut a = 1;
-    a = 2;
-    return a
+////// DURING COMPILATION:
+
+impl Coordinate {
+    fn add(&self, other: &Coordinate) -> Coordinate {
+        Coordinate {
+            x: self.x + other.x,
+            y: self.y + other.y
+        }
+    }
 }
+
+//////
